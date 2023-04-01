@@ -11,6 +11,19 @@ export class App extends Component {
     number: '',
   };
 
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    if (JSON.parse(localStorage.getItem('contacts'))) {
+      this.setState({ contacts: contacts });
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   handleAddContact = newContact => {
     if (this.handleCheckName(newContact.name)) {
       alert(`${newContact.name} is already in contacts.`);
@@ -52,7 +65,6 @@ export class App extends Component {
         <h1> Phone book </h1>
         <ContactForm onAdd={this.handleAddContact} />
         <h2> Contacts </h2>
-
         <Filter filter={filter} onChange={this.handleFilterChange} />
         <ContactList
           contacts={filterContacts}

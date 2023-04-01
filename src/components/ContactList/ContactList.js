@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-const ContactListItem = ({ id, name, phone, onRemove }) => {
+const ContactListItem = ({ id, name, number, onRemove }) => {
   return (
     <li>
-      {name}: {phone} <button onClick={() => onRemove(id)}> Delete</button>
+      {name}: {number} <button onClick={() => onRemove(id)}> Delete</button>
     </li>
   );
 };
@@ -23,7 +23,7 @@ ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
     }).isRequired
   ),

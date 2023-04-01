@@ -5,7 +5,7 @@ import css from './ContactForm.module.css';
 export class ContactForm extends Component {
   state = {
     name: '',
-    phone: '',
+    number: '',
   };
 
   handleChangeForm = ({ target }) => {
@@ -15,17 +15,17 @@ export class ContactForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { name, phone } = this.state;
+    const { name, number } = this.state;
     const { onAdd } = this.props;
 
-    const isSuccess = onAdd({ name, phone });
+    const isSuccess = onAdd({ name, number });
     if (isSuccess) {
       this.reset();
     }
   };
 
   validateForm = () => {
-    const { name, phone } = this.state;
+    const { name } = this.state;
     const { checkName } = this.props;
 
     return checkName(name);
@@ -34,12 +34,12 @@ export class ContactForm extends Component {
   reset = () => {
     this.setState({
       name: '',
-      phone: '',
+      number: '',
     });
   };
 
   render() {
-    const { name, phone } = this.state;
+    const { name, number } = this.state;
     return (
       <form onSubmit={this.handleFormSubmit} className={css.form}>
         <label> Name </label>
@@ -55,11 +55,11 @@ export class ContactForm extends Component {
         <label> Phone </label>
         <input
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={phone}
+          value={number}
           onChange={this.handleChangeForm}
         />
 
